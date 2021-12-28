@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <title>Title</title>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/mypage',
+                data: {},
+                success: function (response) {
+                    let rows = response['feeds']
+                    for (let i = 0; i < rows.length; i++) {
+                        let image = rows[i]['image']
+                        let comment = rows[i]['comment']
+
+                        let temp_html = `
+                            <div id="${i}">
+                            <p>${image}</p>
+                            <p>${comment}</p>
+                            <button onclick="delete_feed()">삭제</button>
+                            </div>
+            `
+                        $('#feed-box').append(temp_html)
+                    }
+                }
+            })
+        }
+        function posting() {
+            let image = $('#image_url').val()
+            let comment = $('#comment').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/mypage',
+                data: {image_give:image, comment_give:comment},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function delete_feed() {
+
+            $.ajax({
+                type: 'POST',
+                url: '/mypage',
+                data: {},
+                success: function (response) {
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="mypost" id="post-box">
+    <div>
+        <input id="image_url">
+    </div>
+    <div>
+        <textarea id="comment"></textarea>
+    </div>
+    <button onclick="posting()" type="button">업로드</button>
+
+</div>
+<div class="feed">
+    <div id="feed-box">
+
+    </div>
+</div>
+</body>
+</html>
