@@ -11,74 +11,55 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <title>Title</title>
-    <script>
-        $(document).ready(function () {
-            listing();
-        });
-
-        function listing() {
-            $.ajax({
-                type: 'GET',
-                url: '/mypage',
-                data: {},
-                success: function (response) {
-                    let rows = response['feeds']
-                    for (let i = 0; i < rows.length; i++) {
-                        let image = rows[i]['image']
-                        let comment = rows[i]['comment']
-
-                        let temp_html = `
-                            <div id="${i}">
-                            <p>${image}</p>
-                            <p>${comment}</p>
-                            <button onclick="delete_feed()">삭제</button>
-                            </div>
-            `
-                        $('#feed-box').append(temp_html)
-                    }
-                }
-            })
-        }
-        function posting() {
-            let image = $('#image_url').val()
-            let comment = $('#comment').val()
-
-            $.ajax({
+</head>
+<script>
+    $(document).ready(function () {
+        listing();
+    });
+    function setLike() {
+        let like = true
+         $.ajax({
                 type: 'POST',
-                url: '/mypage',
-                data: {image_give:image, comment_give:comment},
+                url: '/mainpage',
+                data: {like_give: like},
                 success: function (response) {
                     alert(response['msg'])
-                    window.location.reload()
+                    window.location.href = 'http://localhost:5000/my_page'
                 }
             });
-        }
 
-        function delete_feed() {
+    }
 
-            $.ajax({
-                type: 'POST',
-                url: '/mypage',
-                data: {},
-                success: function (response) {
+    function listing() {
+        $.ajax({
+            type: 'GET',
+            url: '/mainpage',
+            data: {},
+            success: function (response) {
+                let rows = response['all_feeds']
+                for (let i = 0; i < rows.length; i++) {
+                    let image = rows[i]['image']
+                    let comment = rows[i]['comment']
+                    let date = rows[i]['date']
+
+                    let temp_html = `
+                            <div id="${i}">
+                            <p>${date}</p>
+                            <p>${image}</p>
+                            <p>${comment}</p>
+                            <button onclick="setLike()">좋아요</button>
+                            </div>
+            `
+                    $('#home_list').append(temp_html)
                 }
-            })
-        }
-    </script>
-</head>
+            }
+        })
+    }
+</script>
 <body>
-<div class="mypost" id="post-box">
-    <div>
-        <input id="image_url">
-    </div>
-    <div>
-        <textarea id="comment"></textarea>
-    </div>
-    <button onclick="posting()" type="button">업로드</button>
-
-</div>
-<div class="feed">
-    <div id="feed-box">
+<h1>main page</h1>
+<div>
+    <div id="home_list">
 
     </div>
 </div>
