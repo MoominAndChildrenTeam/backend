@@ -18,7 +18,7 @@ app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'jcodeofficer@gmail.com'
-app.config['MAIL_PASSWORD'] = '#####################'
+app.config['MAIL_PASSWORD'] = '####'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -91,6 +91,10 @@ def api_register():
     if db.users.find_one({'nickname':nickname}):
         return jsonify({'result':'fail', 'msg': '이미 존재하는 닉네임입니다.'})
 
+
+    if send_auth_email(email) == False:
+        return jsonify({'result': 'fail', 'msg': '올바른 이메일을 입력하세요'})
+
     doc = {
         'email': email,
         'nickname': nickname,
@@ -98,12 +102,17 @@ def api_register():
         'auth': False
     }
 
-    user = db.users.insert_one(doc)
+    db.users.insert_one(doc)
 
-    if send_auth_email(email) == False:
-        return jsonify({'result': 'fail', 'msg': '올바른 이메일을 입력하세요'})
+    # 로그인
+    payload = {
+        'email': email,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5000)
+    }
 
-    return jsonify({'result':'success', 'msg': '1차 회원가입 성공'})
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+    return jsonify({'result':'success', 'msg': '1차 회원가입 성공', 'token':token})
 
 
 @app.route('/api/resend', methods=['POST'])
@@ -119,16 +128,16 @@ def api_resned():
 
 @app.route('/api/register2', methods=['POST'])
 def api_register2():
-    EMAIL_AUTH_KEY = request.form['emailauth']
-
-    if EMAIL_AUTH_KEY == CHOISE_CHAR:
-        user_checked = isLogin()
-        print(user_checked)
-        if user_checked:
-            db.users.update_one(user_checked, {'$set':{'auth':True}})
-        return jsonify({'result': 'success', 'msg': '이메일 인증 성공'})
+    user_checked = isLogin()
+    if user_checked:
+        EMAIL_AUTH_KEY = request.form['emailauth']
+        if EMAIL_AUTH_KEY == CHOISE_CHAR:
+            db.users.update_one(user_checked, {'$set': {'auth': True}})
+            return jsonify({'result': 'success', 'msg': '이메일 인증 성공'})
+        else:
+            return jsonify({'result': 'fail', 'msg': '잘못된 인증번호 입니다.'})
     else:
-        return jsonify({'result': 'fail', 'msg': '이메일 인증 실패'})
+        return jsonify({'result': 'fail', 'msg': '로그인 해주세요'})
 
 
 
