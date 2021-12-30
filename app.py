@@ -11,12 +11,12 @@ db = client.moomin
 
 app = Flask(__name__)
 
-
 # main
 @app.route('/')
 @app.route('/main_page')
 def mainpage():
     return render_template('index.html')
+
 
 ## 모든 피드를 불러옴
 @app.route("/mainpage", methods=["GET"])
@@ -30,6 +30,7 @@ def all_feed_get():
 def my_page():
     return render_template('mypage.html')
 
+
 ## 내가 쓴 글만 불러옴
 @app.route("/mypage", methods=["GET"])
 def feed_get():
@@ -40,7 +41,7 @@ def feed_get():
 # upload
 @app.route('/upload_page')
 def upload_page():
-    return render_template("apply_photo.html")
+    return render_template("upload_file.html")
 
 
 # 게시물 업로드(날짜, 이름, 코멘트, 좋아요)
@@ -73,10 +74,9 @@ def upload_done():
     save_to = f'static/{filename}.{extension}'
     uploaded_files.save(save_to)
 
-    doc = {'user':file_user_receive, 'img': f'{filename}.{extension}'}
+
+    doc = {'user': file_user_receive, 'img': f'{filename}.{extension}'}
     db.img.insert_one(doc)
-
-
     return render_template('upload.html')
 
 
@@ -84,7 +84,7 @@ def upload_done():
 @app.route('/mainpage', methods=["POST"])
 def set_like():
     like_receive = request.form['like_give']
-    db.all_feeds.update_one({'name': '한장원'}, {'$set': {'like': like_receive}})  ## 로그인된 유저네임을 받아와야 함
+    db.all_feeds.update_one({'name': '한장원'}, {'$set': {'like': like_receive}})  ## name 을 게시글만든 user로 바꿔야함
     print(like_receive)
     return jsonify({'msg': '좋아요'})
 

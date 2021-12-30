@@ -17,11 +17,10 @@
         listing();
     });
     function setLike() {
-        let like = 0
          $.ajax({
                 type: 'POST',
                 url: '/mainpage',
-                data: {like_give: like + 1}, // 좋아요를 누르면 like가 1씩 올라갈 수 있게 수정해야 한다
+                data: {like_give: true}, // 좋아요를 누르면 like가 1씩 올라갈 수 있게 수정해야 한다
                 success: function (response) {
                     alert(response['msg'])
                     window.location.href = 'http://localhost:5000/main_page'
@@ -59,7 +58,6 @@
 <h1>main page</h1>
 <div>
     <div id="home_list">
-
     </div>
 </div>
 </body>

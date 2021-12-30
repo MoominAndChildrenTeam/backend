@@ -29,7 +29,7 @@
                         let date = rows[i]['date']
 
                         let temp_html = `
-                            <div id="${i}">
+                            <div id="${i}"> ## 내림차순을 위해 만들었으나 실패!
                             <p>${date}</p>
                             <p>${name}</p>
                             <p>${comment}</p>
@@ -40,8 +40,6 @@
                 }
             })
         }
-
-
 
         {#function delete_feed() {#}
         {#    $.ajax({#}
@@ -57,11 +55,8 @@
 <h1>mypage</h1>
 <a href="/upload_page">업로드</a>
 <a href="">수정</a>
-
-
 <div class="feed">
     <div id="feed-box">
-
     </div>
 </div>
 </body>

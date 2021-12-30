@@ -13,3 +13,4 @@ users = [
     {"id": "", "name": "Arnold"},
 ]
 db.users.insert_many(users)
+
