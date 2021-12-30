@@ -17,17 +17,16 @@
         listing();
     });
     function setLike() {
-        let like = true
+        let like = 0
          $.ajax({
                 type: 'POST',
                 url: '/mainpage',
-                data: {like_give: like},
+                data: {like_give: like + 1}, // 좋아요를 누르면 like가 1씩 올라갈 수 있게 수정해야 한다
                 success: function (response) {
                     alert(response['msg'])
-                    window.location.href = 'http://localhost:5000/my_page'
+                    window.location.href = 'http://localhost:5000/main_page'
                 }
             });
-
     }
 
     function listing() {
@@ -38,14 +37,14 @@
             success: function (response) {
                 let rows = response['all_feeds']
                 for (let i = 0; i < rows.length; i++) {
-                    let image = rows[i]['image']
+                    let name = rows[i]['name']
                     let comment = rows[i]['comment']
                     let date = rows[i]['date']
 
                     let temp_html = `
                             <div id="${i}">
                             <p>${date}</p>
-                            <p>${image}</p>
+                            <p>${name}</p>
                             <p>${comment}</p>
                             <button onclick="setLike()">좋아요</button>
                             </div>
