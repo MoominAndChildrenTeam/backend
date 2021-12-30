@@ -13,26 +13,24 @@
     <title>Title</title>
     <script>
         function posting() {
-            let name = $('#name').val()
+            let image = $('#image_url').val()
             let comment = $('#comment').val()
 
             $.ajax({
                 type: 'POST',
                 url: '/upload',
-                data: {name_give: name, comment_give: comment},
+                data: {image_give: image, comment_give: comment},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.href = 'http://localhost:5000/my_page'
                 }
             });
         }
-
-
     </script>
 </head>
 <body>
     <div>
-        <input id="name" />
+        <input id="image_url" />
     </div>
     <div>
     <textarea id="comment"></textarea>
