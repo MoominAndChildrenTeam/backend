@@ -24,14 +24,14 @@
                 success: function (response) {
                     let rows = response['my_feeds']
                     for (let i = 0; i < rows.length; i++) {
-                        let image = rows[i]['image']
+                        let name = rows[i]['name']
                         let comment = rows[i]['comment']
                         let date = rows[i]['date']
 
                         let temp_html = `
-                            <div id="${i}">
+                            <div id="${i}"> ## 내림차순을 위해 만들었으나 실패!
                             <p>${date}</p>
-                            <p>${image}</p>
+                            <p>${name}</p>
                             <p>${comment}</p>
                             </div>
             `
@@ -40,8 +40,6 @@
                 }
             })
         }
-
-
 
         {#function delete_feed() {#}
         {#    $.ajax({#}
@@ -56,11 +54,9 @@
 <body>
 <h1>mypage</h1>
 <a href="/upload_page">업로드</a>
-
-
+<a href="">수정</a>
 <div class="feed">
     <div id="feed-box">
-
     </div>
 </div>
 </body>
