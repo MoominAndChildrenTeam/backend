@@ -24,14 +24,14 @@
                 success: function (response) {
                     let rows = response['my_feeds']
                     for (let i = 0; i < rows.length; i++) {
-                        let image = rows[i]['image']
+                        let name = rows[i]['name']
                         let comment = rows[i]['comment']
                         let date = rows[i]['date']
 
                         let temp_html = `
                             <div id="${i}">
                             <p>${date}</p>
-                            <p>${image}</p>
+                            <p>${name}</p>
                             <p>${comment}</p>
                             </div>
             `
@@ -56,6 +56,7 @@
 <body>
 <h1>mypage</h1>
 <a href="/upload_page">업로드</a>
+<a href="">수정</a>
 
 
 <div class="feed">
