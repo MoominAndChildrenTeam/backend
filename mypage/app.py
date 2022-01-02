@@ -26,10 +26,12 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 SECRET_KEY = 'fuckingFlask'
 
+
 def send_mail(subject, sender, recipients, text_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     mail.send(msg)
+
 
 def send_auth_email(email):
     try:
@@ -43,6 +45,7 @@ def send_auth_email(email):
     except:
         return False
 
+
 def isLogin():
     token_receive = request.cookies.get('mytoken')
     try:
@@ -51,6 +54,7 @@ def isLogin():
         return user_info
     except:
         return False
+
 
 @app.route('/')
 def home():
@@ -64,18 +68,20 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/login')
 def login():
     return render_template('login.html')
+
 
 @app.route('/register')
 def register():
     return render_template('register.html')
 
+
 @app.route('/register2')
 def register2():
     return render_template('register2.html')
-
 
 
 # api
@@ -87,11 +93,11 @@ def api_register():
 
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
 
-    if db.users.find_one({'email':email}):
-        return jsonify({'result':'fail', 'msg': '가입된 이메일입니다.'})
+    if db.users.find_one({'email': email}):
+        return jsonify({'result': 'fail', 'msg': '가입된 이메일입니다.'})
 
-    if db.users.find_one({'nickname':nickname}):
-        return jsonify({'result':'fail', 'msg': '이미 존재하는 닉네임입니다.'})
+    if db.users.find_one({'nickname': nickname}):
+        return jsonify({'result': 'fail', 'msg': '이미 존재하는 닉네임입니다.'})
 
     if send_auth_email(email) == False:
         return jsonify({'result': 'fail', 'msg': '올바른 이메일을 입력하세요'})
@@ -113,7 +119,7 @@ def api_register():
 
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-    return jsonify({'result':'success', 'msg': '1차 회원가입 성공', 'token':token})
+    return jsonify({'result': 'success', 'msg': '1차 회원가입 성공', 'token': token})
 
 
 @app.route('/api/resend', methods=['POST'])
@@ -126,6 +132,7 @@ def api_resned():
             return jsonify({'result': 'fail', 'msg': '이메일 재전송 실패 - 이메일 오류 '})
     else:
         return jsonify({'result': 'fail', 'msg': '로그인 first'})
+
 
 @app.route('/api/register2', methods=['POST'])
 def api_register2():
@@ -141,7 +148,6 @@ def api_register2():
         return jsonify({'result': 'fail', 'msg': '로그인 해주세요'})
 
 
-
 @app.route('/api/login', methods=['POST'])
 def api_login():
     email = request.form['id']
@@ -150,8 +156,8 @@ def api_login():
     pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
 
     doc = {
-      'email': email,
-      'pw': pw_hash
+        'email': email,
+        'pw': pw_hash
     }
 
     result = db.users.find_one(doc)
@@ -160,17 +166,15 @@ def api_login():
 
     if result is not None:
         payload = {
-           'email': email,
-           # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5000)
+            'email': email,
+            # 'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=5000)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token})
 
     else:
-       return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
 # main
@@ -205,16 +209,36 @@ def upload_page():
     return render_template("upload_file.html")
 
 
+# 이미지파일 업로드
+@app.route('/upload_done', methods=["POST"])
+def upload_done():
+    id = db.all_feeds.count_documents({}) + 1
+    file_user_receive = db.users.find_one()['nickname']
+    uploaded_files = request.files["file"]
+    extension = uploaded_files.filename.split('.')[-1]
+    mytime = datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
+    filename = f'{file_user_receive} - {mytime}'
+    save_to = f'static/{filename}.{extension}'
+    uploaded_files.save(save_to)
+
+    doc = {'id': id, 'user': file_user_receive, 'img': f'{filename}.{extension}'}
+    db.img.insert_one(doc)
+    return render_template('upload.html')
+
+
 # 게시물 업로드(날짜, 이름, 코멘트, 좋아요)
 @app.route('/upload', methods=["POST"])
 def upload():
+    id = db.all_feeds.count_documents({}) + 1
     date = datetime.today().strftime("%m{} %d{}")
     date = date.format('월', '일')
-    name_receive = request.form['name_give']
+    name_receive = db.users.find_one()['nickname']
     comment_receive = request.form['comment_give']
-    img = db.img.find_one({'user':name_receive})
+    img = db.img.find_one({'id': id})
     like = False
+
     doc = {
+        'id': id,
         'date': date,
         'name': name_receive,
         'comment': comment_receive,
@@ -223,25 +247,9 @@ def upload():
     }
     db.my_feeds.insert_one(doc)
     db.all_feeds.insert_one(doc)
+
     return jsonify({'msg': '저장 완료'})
 
-
-
-# 이미지파일 업로드
-@app.route('/upload_done', methods=["POST"])
-def upload_done():
-    file_user_receive = request.form['file_user']
-    uploaded_files = request.files["file"]
-    extension = uploaded_files.filename.split('.')[-1]
-    mytime = datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
-    filename = f'{file_user_receive} - {mytime}'
-    save_to = f'static/{filename}.{extension}'
-    uploaded_files.save(save_to)
-
-
-    doc = {'user': file_user_receive, 'img': f'{filename}.{extension}'}
-    db.img.insert_one(doc)
-    return render_template('upload.html')
 
 
 # like/unlike
@@ -251,8 +259,6 @@ def set_like():
     like_user = db.all_feeds.find_one({'name'})
     db.all_feeds.update_one({'name': '한장원'}, {'$set': {'like': like_receive}})  ## name 을 게시글만든 user로 바꿔야함
     return jsonify({'msg': '좋아요'})
-
-
 
 
 if __name__ == '__main__':
