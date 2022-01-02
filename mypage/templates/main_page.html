@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <link href="../static/main_page_style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<script>
+    $(document).ready(function () {
+        listing();
+    });
+    function setLike() {
+         $.ajax({
+                type: 'POST',
+                url: '/mainpage',
+                data: {like_give: true}, // 좋아요를 누르면 like가 1씩 올라갈 수 있게 수정해야 한다
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.href = 'http://localhost:5000/main_page'
+                }
+            });
+    }
+
+    function listing() {
+        $.ajax({
+            type: 'GET',
+            url: '/mainpage',
+            data: {},
+            success: function (response) {
+                let rows = response['all_feeds']
+                for (let i = 0; i < rows.length; i++) {
+                    let name = rows[i]['name']
+                    let comment = rows[i]['comment']
+                    let date = rows[i]['date']
+                    let img = rows[i]['image']
+
+
+
+                    let temp_html = `
+                                               <div class="user-name-and-img">
+                                                <div class="feed-user-img">
+                                                    <button class="user-page-img-btn"></button>
+                                                </div>
+                                                <p class="feed-user-name">${name}</p>
+                                            </div>
+                                            <img src="static/${img}">
+                                            <div class="active-btns-wrapper">
+                                                <button class="comment-btn"></button>
+                                                <button class="favorite-btn"></button>
+                                            </div>
+                                            <div class="user-comment-wrapper">
+                                                <p class="comment-user-name">${name}</p>
+                                                <p class="comment">${comment}</p>
+                                            </div>
+                                            <div class="feed-time-wrapper">
+                                                <p class="feed-time">${date}</p>
+                                            </div>
+            `
+                    $('#feed-box').append(temp_html)
+                }
+
+            }
+        })
+    }
+</script>
+<body class="whole-screen">
+    <div class="header">
+        <div class="empty-box-for-adjust-distance"></div>
+        <img class="logo-img" src="../static/images/moomingram.png" alt="무민그램 로고">
+        <img class="camera-btn-box" src="../static/images/camera@3x.png">
+    </div>
+    <div class="story">
+        <div class="users-stories">
+            <div class="each-user-story">
+                <button class="user1-story-img-btn" onclick="to_user_pg()"></button>
+                <p class="user1-name">nickname</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user2-story-img-btn" src="../static/images/무민.jfif"/>
+                <p class="user2-name">nickname</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user3-story-img-btn" src="../static/images/무민.jfif"/>
+                <p class="user3-name">nickname</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user4-story-img-btn" src="../static/images/무민.jfif"/>
+                <p class="user4-name">nickname</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user5-story-img-btn" src="../static/images/무민.jfif"/>
+                <p class="user5-name">nickname</p>
+            </div>
+        </div>
+    </div>
+    <div class="feed" id="feed-box">
+
+
+
+    </div>
+    <div class="mobile-footer">
+        <button id="home_btn" class="home-btn" onclick="to_main()"></button>
+        <button class="search-btn" onclick="to_search()"></button>
+        <button class="plus-btn" onclick="to_upload()"></button>
+        <button class="favorite-btn" onclick="to_favorite()"></button>
+        <button class="my-page-img-btn" onclick="to_my_pg()"></button>
+    </div>
+</body>
+</html>
+        

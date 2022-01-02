@@ -27,12 +27,14 @@
                         let name = rows[i]['name']
                         let comment = rows[i]['comment']
                         let date = rows[i]['date']
+                        let img = rows[i]['image']
 
                         let temp_html = `
-                            <div id="${i}"> ## 내림차순을 위해 만들었으나 실패!
+                            <div id="${i}">
                             <p>${date}</p>
                             <p>${name}</p>
                             <p>${comment}</p>
+                            <img src="static/${img}">
                             </div>
             `
                         $('#feed-box').append(temp_html)
@@ -41,14 +43,14 @@
             })
         }
 
-        {#function delete_feed() {#}
-        {#    $.ajax({#}
-        {#        type: 'POST',#}
-        {#        url: '/mypage',#}
-        {#        data: {},#}
-        {#        success: function (response) {#}
-        {#        }#}
-        {#    })#}
+        // {#function delete_feed() {#}
+        // {#    $.ajax({#}
+        // {#        type: 'POST',#}
+        // {#        url: '/mypage',#}
+        // {#        data: {},#}
+        // {#        success: function (response) {#}
+        // {#        }#}
+        // {#    })#}
     </script>
 </head>
 <body>
