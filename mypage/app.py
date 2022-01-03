@@ -183,6 +183,24 @@ def mainpage():
     return render_template('main_page.html')
 
 
+@app.route('/other_userpage')
+def otheruser():
+    return render_template('other_user_page.html')
+
+@app.route('/other_user_page', methods=["POST"])
+def get_follower():
+    follower_count = request.form['follower_count']
+    follower_status = request.form['follower_status']
+    db.users.update_one({'nickname': '한장원'}, {'$set': {'follower': follower_count}})
+
+
+
+
+@app.route("/users", methods=["GET"])
+def user_get():
+    user = db.users.find_one()['nickname']
+    return jsonify({'user': user})
+
 ## 모든 피드를 불러옴
 @app.route("/mainpage", methods=["GET"])
 def all_feed_get():
@@ -200,13 +218,14 @@ def my_page():
 @app.route("/mypage", methods=["GET"])
 def feed_get():
     feed_list = list(db.my_feeds.find({}, {'_id': False}))
-    return jsonify({'my_feeds': feed_list})
+    feed_count = db.my_feeds.count_documents({})
+    return jsonify({'my_feeds': feed_list, 'feed_count': feed_count})
 
 
 # upload
 @app.route('/upload_page')
 def upload_page():
-    return render_template("upload_file.html")
+    return render_template("upload.html")
 
 
 # 이미지파일 업로드
