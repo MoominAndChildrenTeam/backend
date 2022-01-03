@@ -190,9 +190,9 @@ def otheruser():
 @app.route('/other_user_page', methods=["POST"])
 def get_follower():
     follower_count = request.form['follower_count']
-    follower_status = request.form['follower_status']
+    follow_status = request.form['follow_status']
     db.users.update_one({'nickname': '한장원'}, {'$set': {'follower': follower_count}})
-
+    db.users.update_one({'nickname': '한장원'}, {'$set': {'follow_status': follow_status}})
 
 
 

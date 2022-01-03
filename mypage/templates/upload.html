@@ -15,13 +15,12 @@
     <title>Title</title>
     <script>
         function posting() {
-            let name = $('#name').val()
-            let comment = $('#comment').val()
+            let comment = $('#feed_content').val()
 
             $.ajax({
                 type: 'POST',
                 url: '/upload',
-                data: {name_give: name, comment_give: comment},
+                data: {comment_give: comment},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.href = 'http://localhost:5000/my_page'
@@ -33,13 +32,36 @@
 
     </script>
 </head>
+
 <body>
-    <div>
-        <input id="name" />
+    <div class="header">
+        <img class="back-img" onclick="go_back()" src="../static/images/back@3x.png">
+        <p id="posting_text"><b>POSTing</b></p>
+        <img class='upload_image' onclick="posting()" src="../static/images/plus.png">
     </div>
-    <div>
-    <textarea id="comment"></textarea>
+    <div class="screen">
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_done') }}" class="img-container">
+            <div id="drop-file" class="drag-file">
+                <label class="file-label" for="chooseFile">
+                    <img src="../static/images/upload.png" alt="파일 아이콘" class="image"></label>
+                <input class="file" id="chooseFile" type="file" name="file"/>
+
+                <img src="" alt="미리보기 이미지" id="feed_image_file" class="preview">
+                <input  type="submit"/>
+            </div>
+
+        </form>
+        <div class="writing-container">
+            <div class="content_text">CONTENT</div>
+            <textarea name="content" id="feed_content" placeholder="게시글을 작성해주세요." required></textarea>
+        </div>
     </div>
-    <button onclick="posting()" type="button">업로드</button>
+    <div class="mobile-footer">
+        <img class="icon2" onclick="to_main()" src="../static/images/home@3x.png">
+        <img class="icon2" onclick="to_search()" src="../static/images/search@3x.png">
+        <img class="plus-btn" onclick="to_upload()" src="../static/images/plus.png">
+        <img class="icon2" onclick="to_favorite()" src="../static/images/like@3x.png">
+        <img class="my-page-img" onclick="to_mypage()" src="../static/images/무민.jfif">
+    </div>
 </body>
 </html>

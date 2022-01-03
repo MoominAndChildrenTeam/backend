@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/mypage_style.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,7 +17,39 @@
             listing();
         });
 
+
         function listing() {
+            $.ajax({
+                        type: 'GET',
+                        url: '/users',
+                        data: {},
+                        success: function (response) {
+                            let user = response['user']
+                            let name = user
+
+                            let header_name_temp = `<b>${name}</b>`
+                            $('#nickname').append(header_name_temp)
+                        }
+                    }
+            )
+
+            $.ajax({
+                        type: 'GET',
+                        url: '/mypage',
+                        data: {},
+                        success: function (response) {
+                            let feed_count = response['feed_count']
+
+                            let feed_count_temp = `
+                                    <p><b>게시물</b></p>
+                                    <p class=countmargin id = feed><b>${feed_count}</b></p>
+                        `
+                            $('#feed_count').append(feed_count_temp)
+                        }
+                    }
+            )
+
+
             $.ajax({
                 type: 'GET',
                 url: '/mypage',
@@ -24,42 +57,59 @@
                 success: function (response) {
                     let rows = response['my_feeds']
                     for (let i = 0; i < rows.length; i++) {
-                        let name = rows[i]['name']
-                        let comment = rows[i]['comment']
-                        let date = rows[i]['date']
                         let img = rows[i]['image']
 
                         let temp_html = `
-                            <div id="${i}">
-                            <p>${date}</p>
-                            <p>${name}</p>
-                            <p>${comment}</p>
-                            <img src="static/${img}">
-                            </div>
-            `
-                        $('#feed-box').append(temp_html)
+                        <img class='feed_image' onclick="movepage()" src="../static/${img}"/>
+                        `
+                        $('#feed_image_id').append(temp_html)
                     }
                 }
             })
         }
+        function movepage(page){
+            location.href = 'upload_page'
+        }
 
-        // {#function delete_feed() {#}
-        // {#    $.ajax({#}
-        // {#        type: 'POST',#}
-        // {#        url: '/mypage',#}
-        // {#        data: {},#}
-        // {#        success: function (response) {#}
-        // {#        }#}
-        // {#    })#}
+
     </script>
 </head>
 <body>
-<h1>mypage</h1>
-<a href="/upload_page">업로드</a>
-<a href="">수정</a>
-<div class="feed">
-    <div id="feed-box">
+        <div class='header'>
+            <img class="back-img" onclick="returnpage() "src="../static/images/back@3x.png"></button>
+            <p id=nickname></p>
+            <img class='setting' src="../static/images/setting.png">
+        </div>
+    <div class='all'>
+        <div class="profile">
+            <div id = 'profile-image'>
+                <img class="my-page-img1" onclick="reload()" src="../static/images/무민.jfif"/>
+            </div>
+            <div id="feed_count" class=wrapper>
+
+            </div>
+            <div class=wrapper>
+                <p><b>팔로워</b></p>
+                <p class=countmargin id = follower_count><b>10,182</b></p>
+            </div>
+            <div class=wrapper>
+                <p><b>팔로잉</b></p>
+                <p class=countmargin id = following_count><b>3</b></p>
+            </div>
+        </div>
+        <div style="width : 100%;">
+            <div id="feed_image_id" class=feed>
+
+
+            </div>
+        </div>
     </div>
-</div>
+    <div class="mobile-footer">
+        <img class="icon2" onclick="movepage()" src="../static/images/home@3x.png">
+        <img class="icon2" src="../static/images/search@3x.png">
+        <img class="icon3" onclick="movepage()" src="../static/images/plus.png">
+        <img class="icon2" onclick="movepage()" src="../static/images/like@3x.png">
+        <img class="my-page-img" onclick="movepage()" src="../static/images/무민.jfif">
+    </div>
 </body>
 </html>
