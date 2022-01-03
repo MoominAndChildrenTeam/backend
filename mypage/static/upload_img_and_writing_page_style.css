@@ -1,0 +1,202 @@
+* {
+    font-family: 'Dongle', sans-serif;
+}
+
+.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom-width: 0.1vh;
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 15vw;
+    position: fixed;
+    background-color: white;
+    padding-left: 5vw;
+    z-index: 10;
+}
+
+.mobile-footer {
+    border-top-width: 0.1vh;
+    border-top-style: solid;
+    border-top-color: lightgrey;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 21vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+}
+
+.my-page-img {
+    border-radius: 50%;
+    height: 10vw;
+    width: 10vw;
+}
+
+
+.img-container {
+    padding-top: 3vw;
+    padding-left: 2.2vw;
+    width: 100%;
+    height: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.writing-container {
+    padding-top: 5vw;
+    width : 100%;
+    height: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 5vw;
+}
+.content_text {
+    font-size: 6vw;
+}
+#feed_content {
+    width: 90%;
+    height: 40vw;
+    font-size: 4vw;
+}
+
+
+#posting_text {
+    margin-left: 3vw;
+    font-size: 7vw;
+}
+
+.upload_image {
+    margin: auto 12vw auto auto;
+    height: 8vw;
+    width: 8vw;
+}
+
+.screen {
+    width: 100%;
+    padding-top: 15vw;
+    padding-bottom: 20vw;
+}
+
+.back-img {
+    height: 6vw;
+}
+
+.home-btn {
+    height: 6vw;
+    width: 6vw;
+
+    background-image: url("../static/images/home@3x.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border: none;
+    background-color: transparent;
+}
+
+.search-btn {
+    height: 6vw;
+    width: 6vw;
+
+    background-image: url("../static/images/search@3x.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border: none;
+    background-color: transparent;
+}
+
+.plus-btn {
+    height: 7vw;
+    width: 7vw;
+
+    background-image: url("../static/images/plus.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border: none;
+    background-color: transparent;
+}
+
+.favorite-btn {
+    height: 5.4vw;
+    width: 6vw;
+
+    background-image: url("../static/images/like@3x.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    border: none;
+    background-color: transparent;
+}
+
+.my-page-img-btn {
+    border-radius: 50%;
+    height: 6vw;
+    width: 6vw;
+
+    background-image: url("../static/images/무민.jfif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: none;
+    background-color: transparent;
+}
+
+.img-container .drag-file {
+    position: relative;
+    width: 100%;
+    height: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-width: 0.1vh;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+
+}
+.image {
+    width:40vw;
+}
+
+/*드래그해서 가져오면 빨간줄로 바뀌게하는것*/
+.img-container .drag-file.highlight {
+    border: 3px solid red;
+}
+
+/*선택하면 나올 이미지들*/
+.img-container .drag-file .preview {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.img-container .file {
+    display: none;
+}
+.message {
+    color: grey;
+    font-size: 8vw;
+}
