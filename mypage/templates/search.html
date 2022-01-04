@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- 공통 -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../static/search_page.css">
+
+        <!-- title -->
+        <title>moominstagram</title>
+    </head>
+    <body>
+
+        <!-- 검색 -->
+        <div class="header">
+            <img class="back-img" src="../static/images/back@3x.png">
+            <div class="search_container">
+                <button class="real-search-btn"></button>
+                <input type="text" id="search_input" placeholder="닉네임 검색">
+            </div>
+        </div>
+
+        <!-- 메뉴 -->
+        <div class="mobile-footer">
+            <button id="home_btn" class="home-btn" onclick="to_main()"></button>
+            <button class="search-btn" onclick="to_search()"></button>
+            <button class="plus-btn" onclick="to_upload()"></button>
+            <button class="favorite-btn" onclick="to_favorite()"></button>
+            <button class="my-page-img-btn" onclick="to_my_pg()"></button>
+        </div>
+
+        <!-- JS -->
+        <script src="../static/js/main_page_function.js"></script>
+    </body>
+</html>

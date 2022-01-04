@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/other_user_page_style.css">
+    <script defer src="../static/other_user_page.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>moomingram</title>
+    <script>
+            function returnpage(){
+                window.history.go(-1);
+            }
+            function  reload(){
+                location.reload()
+            }
+            function movepage(){
+                location.href='https://www.naver.com'
+            }
+    </script>
+</head>
+<body>
+        <div class='header'>
+           <div>
+            <img class="back-img" onclick="returnpage()" src="../static/images/back@3x.png">
+               </div>
+            <p id=nickname><b>nickname 여기에 넣으면 됩니다</b></p>
+
+        </div>
+    <div class='all'>
+        <div class="profile" id = 'profile'>
+            <div id = 'profile-image'>
+                <img class="my-page-img1" onclick="reload()" src="../static/images/무민.jfif"/>
+            </div>
+                <div id = 'column'>
+                    <div id = 'row'>
+                        <div class=wrapper>
+                            <h><b>게시물</b></h>
+                            <h class=countmargin><b>300</b></h>
+                        </div>
+                        <div class=wrapper>
+                            <h><b>팔로워</b></h>
+                            <h class=countmargin><b>10,182</b></h>
+                        </div>
+                        <div class=wrapper>
+                            <h><b>팔로잉</b></h>
+                            <h class=countmargin><b>3</b></h>
+                        </div>
+                    </div>
+
+                    <div id = follow_btn>
+<!--                        js 삭제 구문-->
+
+                            <button id="1" onclick="post_follow()" type="button" class="btn btn-primary" style="width: 100%"><b>팔로우</b></button>
+<!--                        js 삭제 구문-->
+                    </div>
+                </div>
+        </div>
+        <div style="width : 100%;">
+            <div id=introduce>
+                <p style="margin-top: 0">무민은 스웨덴계 핀란드인 작가 토베 얀손(Tove Jansson, 1914 ~ 2001)이 만든 주인공 캐릭터와 그 캐릭터가 등장하는 소설,
+                    만화 등의 시리즈를 말한다. </p>
+            </div>
+            <div class=feed>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+            </div>
+            <div class=feed>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+            </div>
+            <div class=feed>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+                <img class='feed_image' onclick="movepage()" src="../static/images/무민.jfif"/>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-footer">
+        <div>
+        <img class="icon2" onclick="movepage()" src="../static/images/home@3x.png">
+            </div>
+        <div>
+        <img class="icon2" src="../static/images/search@3x.png">
+            </div>
+        <div>
+        <img class="icon3" onclick="movepage()" src="../static/images/plus.png">
+            </div>
+        <div>
+        <img class="icon2" onclick="movepage()" src="../static/images/like@3x.png">
+            </div>
+        <div id = my_footer_img>
+        <img class="my-page-img" onclick="movepage()" src="../static/images/무민.jfif">
+            </div>
+    </div>
+</body>
+</html>

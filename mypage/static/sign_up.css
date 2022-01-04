@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Dongle', sans-serif;
+}
+
+.logo {
+    width: 30vw;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    height: 300vw;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+}
+.signup_upper_part{
+    width: 100%;
+    height: 50vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sign_up_text {
+    font-size: 10vw;
+    color: grey;
+}
+
+.signup {
+    margin-top: 20vw;
+    background-color: white;
+    width: 80%;
+    height: 250vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup_id {
+    display: flex;
+    margin-left: 13vw;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    font-size: 6vw;
+}
+
+.signup_id input {
+    margin-left: 3vw;
+    font-size: 6vw;
+    width: 50vw;
+    height: 12vw;
+    padding: 0 4vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+
+.signup_pw {
+    margin-top: 5vw;
+    margin-left: 13vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    font-size: 6vw;
+}
+
+.signup_pw input {
+    margin-left: 3vw;
+    font-size: 6vw;
+    width: 50vw;
+    height: 12vw;
+    padding: 0 4vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+.signup_pw_confirm {
+    margin-top: 5vw;
+    margin-left: 13vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    font-size: 6vw;
+}
+
+.signup_pw_confirm input {
+    margin-left: 3vw;
+    font-size: 5vw;
+    width: 50vw;
+    height: 12vw;
+    padding: 0 4vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+.signup_nickname {
+    margin-top: 6vw;
+    margin-left: 13vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    font-size: 6vw;
+}
+
+.signup_nickname input {
+    margin-left: 3vw;
+    font-size: 5vw;
+    width: 50vw;
+    height: 12vw;
+    padding: 0 4vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+.input_part {
+    width: 88%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+.input_part button {
+    width: 15vw;
+    height: 8vw;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    background-color: lightblue;
+    font-size: 3vw;
+    color: white;
+    letter-spacing: 0.5vw;
+}
+.input_pw_part {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.signup_button {
+    margin-top: 10vw;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.signup_button button {
+    width: 80%;
+    height: 15vw;
+    border: 0;
+    outline: none;
+    border-radius: 40px;
+    background-color: lightblue;
+    font-size: 6vw;
+    color: white;
+    letter-spacing: 1vw;
+}
+
+
+.upload-box {
+    margin-top: 15vw;
+    width: 100%;
+    height: 40vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*점선테두리박스안에것들*/
+.upload-box .drag-file {
+    position: relative;
+    width: 40vw;
+    height: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #dbdbdb;
+    border-radius: 50%;
+}
+/*드래그해서 가져오면 빨간줄로 바뀌게하는것*/
+.upload-box .drag-file.highlight {
+    border: 3px solid red;
+}
+/*업로드이미지 - 아이콘*/
+.upload-box .drag-file .image {
+    width: 20vw;
+}
+/*Drag files to upload 글씨*/
+.upload-box .drag-file .message {
+   font-size: 4vw;
+    color: grey;
+}
+/*선택하면 나올 이미지들*/
+.upload-box .drag-file .preview {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+/*파일 업로드 선택 버튼*/
+.upload-box .file-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 30vw;
+    height: 10vw;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    background-color: gainsboro;
+    font-size: 3vw;
+    color: white;
+    letter-spacing: 0.5vw;
+}
+/*못생긴 파일업로드버튼과 이름*/
+.upload-box .file {
+    display: none;
+}

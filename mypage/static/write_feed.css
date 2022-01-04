@@ -1,0 +1,33 @@
+* {
+    font-family: 'Dongle', sans-serif;
+}
+
+.header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom-width: 0.1vh;
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 15vw;
+    padding-left: 5vw;
+    position: fixed;
+    background-color: white;
+
+}
+
+.back-img {
+    height: 6vw;
+}
+.choose-image {
+    height: 6vw;
+}
+.container {
+    width: 100%;
+    padding-top: 15vw;
+    padding-bottom: 20vw;
+}

@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Dongle', sans-serif;
+}
+
+.logo {
+    width: 30vw;
+}
+
+.user_icon {
+    width: 25vw;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    height: 230vw;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+}
+.login_upper_part{
+    width: 100%;
+    height: 65vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.user_info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.sign_in_text {
+    font-size: 10vw;
+    color: grey;
+}
+
+.login {
+    margin-top: 20vw;
+    background-color: white;
+    width: 80%;
+    height: 180vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.login_id {
+    width: 80%;
+    font-size: 6vw;
+}
+
+.login_id input {
+    font-size: 5vw;
+    width: 100%;
+    height: 12vw;
+    border-radius: 30px;
+    padding: 0 5vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+.login_pw {
+    width: 80%;
+    font-size: 6vw;
+    margin-top: 5vw;
+}
+
+.login_pw input {
+    font-size: 5vw;
+    width: 100%;
+    height: 12vw;
+    border-radius: 30px;
+    padding: 0 5vw;
+    border: 1px solid lightgray;
+    outline: none;
+}
+
+.btns {
+    margin-left: 6vw;
+    margin-top: 10vw;
+    width: 80%;
+    height: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+
+.login_button {
+    width: 100%;
+}
+
+.login_button button {
+    width: 80%;
+    height: 12vw;
+    border: 0;
+    outline: none;
+    border-radius: 40px;
+    background-color: lightblue;
+    font-size: 5vw;
+    color: white;
+    letter-spacing: 1vw;
+}
+
+.signup_button {
+    width: 100%;
+}
+
+.signup_button button {
+    width: 80%;
+    height: 12vw;
+    border: 0;
+    outline: none;
+    border-radius: 40px;
+    background-color: lightblue;
+    font-size: 5vw;
+    color: white;
+    letter-spacing: 1vw;
+}

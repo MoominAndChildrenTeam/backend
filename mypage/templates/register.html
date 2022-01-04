@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/sign_up.css">
+        <title>moomingram</title>
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    </head>
+    <body>
+    <div class="container">
+        <div class="signup">
+            <div class="signup_upper_part">
+                <img class="logo" src="../static/images/moomingram.png">
+
+                <div class="sign_up_text">sign up</div>
+            </div>
+            <!-- email and 중복체킄  -->
+            <div class="signup_id">
+                <h4>E-MAil</h4>
+                <div class="input_part">
+                    <input type="email" id="userid" placeholder="enter your email">
+                    <div class="email_confirm_button">
+                        <button type="submit" value="submit" onclick="confirmEmail()">이메일 확인</button>
+                    </div>
+                </div>
+            </div>
+            <!-- pw  -->
+            <div class="signup_pw">
+                <h4>PW</h4>
+                <input type="password" id="password1" onchange="check_pw()" placeholder="enter your password">
+            </div>
+            <!-- pw confirm -->
+            <div class="signup_pw_confirm">
+                <h4>PW-confirm</h4>
+                <div class="input_pw_part">
+                    <input type="password" id="password2" placeholder="confirm your password"
+                           onchange="check_pw()">
+                    <span id="check"></span>
+                </div>
+            </div>
+            <!-- 닉네임, 중복체크  -->
+            <div class="signup_nickname">
+                <h4>NICKNAME</h4>
+                <div class="input_part">
+                    <input type="text" placeholder="enter your nickname" id="usernick">
+                    <div class="nickname_confirm_button">
+                        <button type="submit" value="submit" onclick="confirmNickname()">중복 확인</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 회원가입 프로필 파일 업로드 -->
+            <div class="upload-box">
+                <div id="drop-file" class="drag-file">
+                    <img src="../static/images/upload.png" alt="파일 아이콘" class="image">
+                    <p class="message">Drag files to upload</p>
+                    <img src="" alt="미리보기 이미지" class="preview">
+                </div>
+                <label class="file-label" for="chooseFile">Choose Profile-Image</label>
+                <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)"
+                       accept="image/png, image/jpeg, image/gif">
+            </div>
+            <div class="signup_button">
+                <button type="submit" value="submit" onclick="register()"> Sign Up</button>
+            </div>
+        </div>
+    </div>
+    <!--    sign up  JS -->
+    <script src="../static/sign_up.js"></script>
+    </body>
+</html>

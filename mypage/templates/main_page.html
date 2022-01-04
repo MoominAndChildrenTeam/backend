@@ -17,6 +17,14 @@
     $(document).ready(function () {
         listing();
     });
+    function move_mypage() {
+        location.href = 'my_page'
+    }
+
+    function move_uploadpage() {
+        location.href = 'write'
+    }
+
     function setLike() {
          $.ajax({
                 type: 'POST',
@@ -40,14 +48,14 @@
                     let name = rows[i]['name']
                     let comment = rows[i]['comment']
                     let date = rows[i]['date']
-                    let img = rows[i]['image']
+                    let img = rows[i]['img']
 
 
 
                     let temp_html = `
                                                <div class="user-name-and-img">
                                                 <div class="feed-user-img">
-                                                    <button class="user-page-img-btn"></button>
+                                                    <button onclick="move_mypage()" class="user-page-img-btn"></button>
                                                 </div>
                                                 <p class="feed-user-name">${name}</p>
                                             </div>
@@ -80,24 +88,24 @@
     <div class="story">
         <div class="users-stories">
             <div class="each-user-story">
-                <button class="user1-story-img-btn" onclick="to_user_pg()"></button>
-                <p class="user1-name">nickname</p>
+                <img class="user1-story-img-btn" src="../static/images/유재석.jpeg"/>
+                <p class="user2-name">you_jae_suk</p>
             </div>
             <div class="each-user-story">
-                <img class="user2-story-img-btn" src="../static/images/무민.jfif"/>
-                <p class="user2-name">nickname</p>
+                <img class="user2-story-img-btn" src="../static/images/아이유.jpeg"/>
+                <p class="user2-name">lilyiu_</p>
             </div>
             <div class="each-user-story">
-                <img class="user3-story-img-btn" src="../static/images/무민.jfif"/>
-                <p class="user3-name">nickname</p>
+                <img class="user3-story-img-btn" src="../static/images/지코.jpeg"/>
+                <p class="user3-name">woozico0914</p>
             </div>
             <div class="each-user-story">
-                <img class="user4-story-img-btn" src="../static/images/무민.jfif"/>
-                <p class="user4-name">nickname</p>
+                <img class="user4-story-img-btn" src="../static/images/카리나.jpeg"/>
+                <p class="user4-name">aespa_karina</p>
             </div>
             <div class="each-user-story">
-                <img class="user5-story-img-btn" src="../static/images/무민.jfif"/>
-                <p class="user5-name">nickname</p>
+                <img class="user5-story-img-btn" src="../static/images/노제.jpeg"/>
+                <p class="user5-name">nozeworld</p>
             </div>
         </div>
     </div>
@@ -109,9 +117,9 @@
     <div class="mobile-footer">
         <button id="home_btn" class="home-btn" onclick="to_main()"></button>
         <button class="search-btn" onclick="to_search()"></button>
-        <button class="plus-btn" onclick="to_upload()"></button>
+        <button class="plus-btn" onclick="move_uploadpage()"></button>
         <button class="favorite-btn" onclick="to_favorite()"></button>
-        <button class="my-page-img-btn" onclick="to_my_pg()"></button>
+        <button class="my-page-img-btn" onclick="move_mypage()"></button>
     </div>
 </body>
 </html>

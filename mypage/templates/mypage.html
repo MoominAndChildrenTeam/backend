@@ -57,7 +57,7 @@
                 success: function (response) {
                     let rows = response['my_feeds']
                     for (let i = 0; i < rows.length; i++) {
-                        let img = rows[i]['image']
+                        let img = rows[i]['img']
 
                         let temp_html = `
                         <img class='feed_image' onclick="movepage()" src="../static/${img}"/>
@@ -67,8 +67,12 @@
                 }
             })
         }
-        function movepage(page){
-            location.href = 'upload_page'
+        function move_upload(page){
+            location.href = 'write'
+        }
+
+        function move_mainpage(page) {
+            location.href = 'main_page'
         }
 
 
@@ -105,9 +109,9 @@
         </div>
     </div>
     <div class="mobile-footer">
-        <img class="icon2" onclick="movepage()" src="../static/images/home@3x.png">
+        <img class="icon2" onclick="move_mainpage()" src="../static/images/home@3x.png">
         <img class="icon2" src="../static/images/search@3x.png">
-        <img class="icon3" onclick="movepage()" src="../static/images/plus.png">
+        <img class="icon3" onclick="move_upload()" src="../static/images/plus.png">
         <img class="icon2" onclick="movepage()" src="../static/images/like@3x.png">
         <img class="my-page-img" onclick="movepage()" src="../static/images/무민.jfif">
     </div>

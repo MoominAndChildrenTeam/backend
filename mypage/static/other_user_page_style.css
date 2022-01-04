@@ -48,6 +48,7 @@
             height: 10vw;
             object-fit: cover;
         }
+
         .back-img {
             height: 6vw;
         }
@@ -66,7 +67,7 @@
         }
 
         #nickname {
-            margin-left: 3vw;
+            margin : auto auto auto 3vw;
             font-size: xxx-large;
         }
 
@@ -84,28 +85,29 @@
             width: 30vw;
             font-size: xx-large;
         }
-        .setting{
-            margin: auto 12vw auto auto;
-            height: 8vw;
-            width : 8vw;
-        }
 
         .feed {
             width: 100%;
             display: flex;
-            flex-wrap: wrap;
             flex-direction: row;
-            justify-content: flex-start;
+            justify-content: center;
         }
         .feed_image {
-            height: 33.2vw;
-            width: 33.2vw;
+            height: 33.3vw;
+            width: 33.3vw;
         }
-
-
 
         .all {
             width : 100%;
             padding-top: 15vw;
             padding-bottom: 20vw;
+        }
+        #column{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        #row{
+            display: flex;
+            justify-content: space-around;
         }
