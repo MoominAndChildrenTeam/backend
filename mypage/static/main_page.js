@@ -1,3 +1,74 @@
+window.onload = function () {
+    /*댓글 입력 창 보이기, 숨기기*/
+    let cmt = document.querySelector('.comment-btn');
+    let cmt_container = document.querySelector('.comment-container')
+    cmt.addEventListener('click', function () {
+        cmt_container.classList.toggle('active');
+    })
+
+    /*좋아요 버튼 이미지 변경 일부 구현*/
+    let likeBtn = document.querySelector('.like-btn');
+    let like_cnt = 0;
+    let liked_user_name = document.querySelector('.my-page-img-btn').getAttribute('alt')
+    likeBtn.addEventListener('click', function () {
+        /*
+        likeBtn.src = '../../src/static/images/heart.png'
+        like_cnt = 'True'
+         */
+        if (like_cnt === 0) {
+            likeBtn.src = 'https://t1.daumcdn.net/cfile/blog/99A4FE405B9D71A414';
+            like_cnt = 1;
+
+            $.ajax({
+                type: 'POST',
+                url: '/main_page4',
+                data: {liked_user_name_give: liked_user_name, like_cnt_give: like_cnt},
+                success: function (response) {
+                    alert(response['result'])
+                }
+            })
+        } else if (like_cnt === 1) {
+            likeBtn.src = '../static/images/like@3x.png';
+            like_cnt = 0;
+
+            $.ajax({
+                type: 'POST',
+                url: '/main_page4',
+                data: {liked_user_name_give: liked_user_name, like_cnt_give: like_cnt},
+                success: function (response) {
+                    alert(response['result'])
+                }
+            })
+        }
+    })
+
+    /*댓글 게시 버튼*/
+    let cmt_register = document.querySelector('.comment-register');
+    cmt_register.addEventListener('click', function () {
+        /*    let comment_user_name = $('.my-page-img-btn').getAttribute('alt')*/
+        let comment_user_name = $('.feed-user-name').innerText;
+        let comment = $('.comment-content').val()
+
+        $.ajax({
+            type: "POST",
+            url: "/main_page1",
+            data: {name: comment_user_name, comment_give: comment},
+            success: function (response) {
+                alert(response["result"])
+            }
+        })
+    })
+}
+
+/*
+function comment_btn(){
+    // let cmt = document.querySelector('.comment-btn');
+    let cmt_container = document.querySelector('.comment-container');
+    cmt_container.classList.toggle('active');
+    console.log('success')
+}
+*/
+
 function to_main() {
     location.href = "main_page"
 }
@@ -40,18 +111,6 @@ const scroll = (direction) => {
 }
  */
 
-/*댓글 입력 창 보이기, 숨기기*/
-// let cmt = document.querySelector('.comment-btn');
-// let cmt_container = document.querySelector('.comment-container')
-// cmt.addEventListener('click', function () {
-//     cmt_container.classList.toggle('active');
-// })
-function comment_btn(){
-    // let cmt = document.querySelector('.comment-btn');
-    let cmt_container = document.querySelector('.comment-container');
-    cmt_container.classList.toggle('active');
-    console.log('success')
-}
 
 /* 댓글 게시 버튼 클릭
 let cmt_register = document.querySelector('.comment-register');
@@ -77,42 +136,6 @@ cmt_register.addEventListener('click', function () {
 })
 */
 
-/*좋아요 버튼 이미지 변경 일부 구현*/
-let likeBtn = document.querySelector('.like-btn');
-let like_cnt = 0;
-let liked_user_name = document.querySelector('.my-page-img-btn').getAttribute('alt')
-likeBtn.addEventListener('click', function () {
-    /*
-    likeBtn.src = '../../src/static/images/heart.png'
-    like_cnt = 'True'
-     */
-    if (like_cnt === 0) {
-        likeBtn.src = '../../src/static/images/heart.png';
-        like_cnt = 1;
-
-        $.ajax({
-            type: 'POST',
-            url: '/main_page4',
-            data: {liked_user_name_give:liked_user_name, like_cnt_give:like_cnt},
-            success: function (response) {
-                alert(response['result'])
-            }
-        })
-    } else if (like_cnt === 1) {
-        likeBtn.src = '../../src/static/images/like@3x.png';
-        like_cnt = 0;
-
-        $.ajax({
-            type: 'POST',
-            url: '/main_page4',
-            data: {liked_user_name_give:liked_user_name, like_cnt_give:like_cnt},
-            success: function (response) {
-                alert(response['result'])
-            }
-        })
-    }
-})
-
 function show_like() {
     $.ajax({
         type: 'GET',
@@ -120,12 +143,12 @@ function show_like() {
         data: {},
         success: function (response) {
             let like_feeds = response['like_feeds']
-            for (let i=0; i < like_feeds.length; i++) {
+            for (let i = 0; i < like_feeds.length; i++) {
                 let like_cnt = like_feeds[i]['like_cnt']
                 if (like_cnt === 0) {
-                    $('.like-btn').src = 'https://w7.pngwing.com/pngs/431/359/png-transparent-heart-computer-icons-symbol-zipper-love-zipper-heart-thumbnail.png';
+                    $('.like-btn').src = 'https://t1.daumcdn.net/cfile/blog/99A4FE405B9D71A414';
                 } else if (like_cnt === 1) {
-                    $('.like-btn').src = 'https://e7.pngegg.com/pngimages/211/1012/png-clipart-heart-computer-icons-symbol-desktop-heart-shaped-pattern-love-heart.png';
+                    $('.like-btn').src = '../static/images/like@3x.png';
                 }
             }
         }
@@ -171,32 +194,12 @@ likeBtn.addEventListener('click', function () {
 */
 
 $(document).ready(function () {
-    show_each_user_story()
-    show_feed()
+    listing()
+    /*show_feed()*/
     show_my_profile_btn()
     show_comment()
     show_like()
 });
-
-function show_each_user_story() {
-    $.ajax({
-        type: 'GET',
-        url: '/main_page',
-        data: {},
-        success: function (response) {
-            let stories = response['user_stories']
-            for (let i = 0; i < stories.length; i++) {
-                let user_profile_img = stories[i]['user_profile_img']
-                let user_name = stories[i]['user_name']
-                let temp_html = `<div class="each-user-story">
-                                     <img class="user-story-img-btn" src="${user_profile_img}"/>
-                                     <p class="user-name">${user_name}</p>
-                                 </div>`
-                $('.users-stories').append(temp_html)
-            }
-        }
-    })
-}
 
 // function show_feed() {
 //     $.ajax({
@@ -279,20 +282,45 @@ function show_comment() {
     })
 }
 
-let cmt_register = document.querySelector('.comment-register');
-cmt_register.addEventListener('click', function () {
-/*    let comment_user_name = $('.my-page-img-btn').getAttribute('alt')*/
-    let comment_user_name = $('.feed-user-name').innerText;
-    let comment = $('.comment-content').val()
-
+function listing() {
     $.ajax({
-        type: "POST",
-        url: "/main_page1",
-        data: {nickname: comment_user_name, comment_give: comment},
+        type: 'GET',
+        url: '/mainpage',
+        data: {},
         success: function (response) {
-            alert(response["result"])
+            let rows = response['all_feeds']
+            for (let i = 0; i < rows.length; i++) {
+                let name = rows[i]['name']
+                let comment = rows[i]['comment']
+                let date = rows[i]['date']
+                let img = rows[i]['img']
+
+
+                let temp_html = `<div class="user-name-and-img">
+                                         <div class="feed-user-img">
+                                             <button onclick="move_mypage()" class="user-page-img-btn"></button>
+                                         </div>
+                                         <p class="feed-user-name">${name}</p>
+                                     </div>
+                                     <img src="static/${img}">
+                                     <div class="active-btns-wrapper">
+                                         <img class="comment-btn" src="../static/images/comment@3x.png"/>
+                                         <img class="like-btn" src="../static/images/like@3x.png"/>
+                                     </div>
+                                     <div class="feed-content-box">
+                                         <p class="feed-user-name-of-content">${name}</p>
+                                         <p class="feed-content">${comment}</p>
+                                     </div>
+                                     <div class="user-comment-box"></div>
+                                     <div class="feed-time-wrapper">
+                                         <time datetime="2021-12-30T01:26:43.000Z" class="feed-time">${date}</time>
+                                     </div>
+                                     <div class="comment-container">
+                                         <input class="comment-content" placeholder="댓글 입력"/>
+                                         <button class="comment-register">게시</button>
+                                     </div>`
+                $('#feed-box').append(temp_html)
+            }
         }
     })
-})
-
-// 피드 업로드스크립트
+}

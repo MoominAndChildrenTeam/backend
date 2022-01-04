@@ -15,6 +15,7 @@
             padding-left: 5vw;
             position: fixed;
             background-color: white;
+            font-size: 6vw;
         }
 
         .mobile-footer {
@@ -98,8 +99,8 @@
             justify-content: flex-start;
         }
         .feed_image {
-            height: 33.2vw;
-            width: 33.2vw;
+            height: 33vw;
+            width: 33vw;
         }
 
 

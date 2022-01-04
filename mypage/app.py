@@ -292,9 +292,7 @@ def comment_post():
     }
     db.users.insert_one(doc)
     return jsonify({'result': '등록 완료!'})
-@app.route('/other_userpage')
-def otheruser():
-    return render_template('other_user_page.html')
+
 
 # 댓글 불러오는 부분
 @app.route("/main_page2", methods=["GET"])
@@ -306,8 +304,6 @@ def comment_get():
 def get_follower():
     follower_count = request.form['follower_count']
     follow_status = request.form['follow_status']
-    db.users.update_one({'nickname': '한장원'}, {'$set': {'follower': follower_count}})
-    db.users.update_one({'nickname': '한장원'}, {'$set': {'follow_status': follow_status}})
 
 
 
@@ -400,6 +396,21 @@ def like_get():
     return jsonify({'like_feeds':like_feeds})
 
 
+#다른유저페이지
+@app.route('/other_userpage')
+def otheruser():
+    return render_template('other_user_page.html')
+
+
+
+
+
+@app.route("/other_user_page", methods=["GET"])
+def follow_status_data():
+    doc = {'follow_status': 0}
+    db.follow.insert_one(doc)
+    follow_status = db.follow.find({},{'_id': False})
+    return jsonify({'follow_status' : follow_status})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

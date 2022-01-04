@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="../static/main_page.js"></script>
     <link href="../static/main_page_style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script defer src="../static/main_page.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
@@ -17,9 +17,7 @@
 <script>
     $(document).ready(function () {
         listing();
-
     });
-
 
     function listing() {
         $.ajax({
@@ -35,84 +33,77 @@
                     let img = rows[i]['img']
 
 
-
-                    let temp_html = `
-                                               <div class="user-name-and-img">
-                                                <div class="feed-user-img">
-                                                    <button onclick="move_mypage()" class="user-page-img-btn"></button>
-                                                </div>
-                                                <p class="feed-user-name">${name}</p>
-                                            </div>
-                                            <img src="static/${img}">
-                                            <div class="active-btns-wrapper">
-                                                <img class="comment-btn" onclick="comment_btn()" src="../static/images/comment@3x.png"/>
-                                                <img class="like-btn" src="../static/images/like@3x.png"/>
-                                            </div>
-
-                                            <div class="feed-content-box">
-                                                <p class="feed-user-name-of-content">${name}</p>
-                                                <p class="feed-content">${comment}</p>
-                                            </div>
-                                            <div class="user-comment-box"></div>
-                                            <div class="feed-time-wrapper">
-                                                <time datetime="2021-12-30T01:26:43.000Z" class="feed-time">${date}</time>
-                                            </div>
-                                            <div class="comment-container">
-                                                <input class="comment-content" placeholder="댓글 입력"/>
-                                                <button class="comment-register">게시</button>
-                                            </div>
-            `
+                    let temp_html = `<div class="user-name-and-img">
+                                         <div class="feed-user-img">
+                                             <button onclick="move_mypage()" class="user-page-img-btn"></button>
+                                         </div>
+                                         <p class="feed-user-name">${name}</p>
+                                     </div>
+                                     <img src="static/${img}">
+                                     <div class="active-btns-wrapper">
+                                         <img class="comment-btn" src="../static/images/comment@3x.png"/>
+                                         <img class="like-btn" src="../static/images/like@3x.png"/>
+                                     </div>
+                                     <div class="feed-content-box">
+                                         <p class="feed-user-name-of-content">${name}</p>
+                                         <p class="feed-content">${comment}</p>
+                                     </div>
+                                     <div class="user-comment-box"></div>
+                                     <div class="feed-time-wrapper">
+                                         <time datetime="2021-12-30T01:26:43.000Z" class="feed-time">${date}</time>
+                                     </div>
+                                     <div class="comment-container">
+                                         <input class="comment-content" placeholder="댓글 입력"/>
+                                         <button class="comment-register">게시</button>
+                                     </div>`
                     $('#feed-box').append(temp_html)
                 }
-
             }
         })
     }
 </script>
 <body class="whole-screen">
-    <div class="header">
-        <div class="empty-box-for-adjust-distance"></div>
-        <img class="logo-img" src="../static/images/moomingram.png" alt="무민그램 로고">
-        <img class="camera-btn-box" src="../static/images/camera@3x.png">
-    </div>
-    <div class="body">
-        <div class="story">
-            <div class="users-stories">
-                <div class="each-user-story">
-                    <img class="user-story-img-btn" src="../static/images/유재석.jpeg"/>
-                    <p class="user2-name">you_jae_suk</p>
-                </div>
-                <div class="each-user-story">
-                    <img class="user-story-img-btn" src="../static/images/아이유.jpeg"/>
-                    <p class="user2-name">lilyiu_</p>
-                </div>
-                <div class="each-user-story">
-                    <img class="user-story-img-btn" src="../static/images/지코.jpeg"/>
-                    <p class="user3-name">woozico0914</p>
-                </div>
-                <div class="each-user-story">
-                    <img class="user-story-img-btn" src="../static/images/카리나.jpeg"/>
-                    <p class="user4-name">aespa_karina</p>
-                </div>
-                <div class="each-user-story">
-                    <img class="user-story-img-btn" src="../static/images/노제.jpeg"/>
-                    <p class="user5-name">nozeworld</p>
-                </div>
+<div class="header">
+    <div class="empty-box-for-adjust-distance"></div>
+    <img class="logo-img" src="../static/images/moomingram.png" alt="무민그램 로고">
+    <div class="empty-box-for-adjust-distance"></div>
+</div>
+<div class="body">
+    <div class="story">
+        <div class="users-stories">
+            <div class="each-user-story">
+                <img class="user-story-img-btn" src="../static/images/유재석.jpeg"/>
+                <p class="user1-name">you_jae_suk</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user-story-img-btn" src="../static/images/아이유.jpeg"/>
+                <p class="user2-name">lilyiu_</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user-story-img-btn" src="../static/images/지코.jpeg"/>
+                <p class="user3-name">woozico0914</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user-story-img-btn" src="../static/images/카리나.jpeg"/>
+                <p class="user4-name">aespa_karina</p>
+            </div>
+            <div class="each-user-story">
+                <img class="user-story-img-btn" src="../static/images/노제.jpeg"/>
+                <p class="user5-name">nozeworld</p>
             </div>
         </div>
-        <div class="feed" id="feed-box">
-
-
-        </div>
     </div>
+    <div class="feed" id="feed-box">
 
-    <div class="mobile-footer">
-        <img class="home-btn" src="../static/images/home@3x.png" onclick="to_main()">
-        <img class="search-btn" src="../static/images/search@3x.png" onclick="to_search()">
-        <img class="plus-btn" src="../static/images/plus.png" onclick="to_upload()">
-        <img class="favorite-btn" src="../static/images/like@3x.png" onclick="to_favorite()">
-        <img class="my-page-img-btn" src="../static/images/무민.jfif" alt="무민" onclick="to_my_pg()">
     </div>
+</div>
+
+<div class="mobile-footer">
+    <img class="home-btn" src="../static/images/home@3x.png" onclick="to_main()">
+    <img class="search-btn" src="../static/images/search@3x.png" onclick="to_search()">
+    <img class="plus-btn" src="../static/images/plus.png" onclick="to_upload()">
+    <img class="favorite-btn" src="../static/images/like@3x.png" onclick="to_favorite()">
+    <img class="my-page-img-btn" src="../static/images/무민.jfif" alt="무민" onclick="to_my_pg()">
+</div>
 </body>
 </html>
-        

@@ -18,7 +18,6 @@ function get_other_user_page(){
                 data: {},
                 success: function (response) {
                         let name = ['name']
-                        let feed_count = ['feed_count']
                         let follower_count = ['follower']
                         let following_count = ['following']
                         let new_profile_image = document.createElement('profile_img');
@@ -45,14 +44,12 @@ function get_other_user_page(){
 
                         let introduce = ['introduce']
                         let temp_introduce = `<p style="margin-top: 0">${introduce}</p>`
-                        let temp_name = `<b>${name}</b>`
+                        // let temp_name = `<b>${name}</b>`
                         let temp_feed_count = `<b>${feed_count}</b>`
                         let temp_follower_count = `<b>${follower_count}</b>`
                         let temp_following_count = `<b>${following_count}</b>`
 
                         $('#introduce').append(temp_introduce)
-                        $('#nickname').append(temp_name)
-                        $('#feed').append(temp_feed_count)
                         $('#follower_count').append(temp_follower_count)
                         $('#following_count').append(temp_following_count)
                         $('#my_footer_img').append(new_footer_image)
