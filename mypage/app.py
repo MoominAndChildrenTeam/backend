@@ -6,11 +6,10 @@ import jwt
 import datetime
 import hashlib
 import random
-import gridfs
 import codecs
 from datetime import datetime
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.sylvm.mongodb.net/Cluster0?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://test:sparta@cluster0.sylvm.mongodb.net/Cluster0?retryWrites=true&w=majority',tlsCAFile=certifi.where())
 db = client.moomin
 
 
@@ -282,12 +281,26 @@ def api_write():
 def mainpage():
     return render_template('main_page.html')
 
-
+#댓글쓰는 부분
+@app.route("/main_pag1", methods=["POST"])
+def comment_post():
+    comment_user_name_receive = request.form['nickname']
+    comment_receive = request.form['comment_give']
+    doc = {
+        'comment_user_name': comment_user_name_receive,
+        'comment':comment_receive
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': '등록 완료!'})
 @app.route('/other_userpage')
 def otheruser():
     return render_template('other_user_page.html')
 
-
+# 댓글 불러오는 부분
+@app.route("/main_page2", methods=["GET"])
+def comment_get():
+    comments = list(db.users.find({},{'_id':False}))
+    return jsonify({'comments':comments})
 
 @app.route('/other_user_page', methods=["POST"])
 def get_follower():
@@ -372,15 +385,20 @@ def upload():
 
     return jsonify({'msg': '저장 완료'})
 
+# 좋아요부분
+@app.route("/main_page3", methods=["POST"])
+def like_post():
+    liked_user_name_receive = request.form['liked_user_name_give']
+    like_cnt_receive = request.form['like_cnt_give']
+    doc = {'liked_user_name':liked_user_name_receive}
+    db.like_feeds.insert_one(doc)
+    db.like_feeds.update_one({'liked_user_name':liked_user_name_receive},{'set':{'like_cnt':like_cnt_receive}})
+    return jsonify({'result': '등록 완료!'})
+@app.route("/main_page4", methods=["GET"])
+def like_get():
+    like_feeds = list(db.like_feeds.find({},{'_id':False}))
+    return jsonify({'like_feeds':like_feeds})
 
-
-# like/unlike
-@app.route('/mainpage', methods=["POST"])
-def set_like():
-    like_receive = request.form['like_give']
-    like_user = db.all_feeds.find_one({'name'})
-    db.all_feeds.update_one({'name': '한장원'}, {'$set': {'like': like_receive}})  ## name 을 게시글만든 user로 바꿔야함
-    return jsonify({'msg': '좋아요'})
 
 
 if __name__ == '__main__':
